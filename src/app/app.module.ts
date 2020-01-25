@@ -42,7 +42,7 @@ import { CustomerComponent } from './customer/customer.component';
     RouterModule, AppRoutingModule,
     HttpClientModule
   ],
-  providers: [UserService,FormBuilder,
+  providers: [UserService,FormBuilder
   , CouponsService , HeaderComponent
     , { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
   bootstrap: [AppComponent]
