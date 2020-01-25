@@ -1,0 +1,39 @@
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  img.avatar {
+    width: 10%;
+    border-radius: 20%;
+  }
+  .container {
+    padding: 16px;
+  }
+   /* Change styles for span and cancel button on extra small screens */
+   @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  } 
+  .my-custom-scrollbar {
+    position: relative;
+    height: 20vh;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }

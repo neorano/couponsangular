@@ -1,0 +1,35 @@
+table{
+    text-align: center;
+    column-span: all;
+    border: 3px solid black;  
+    /* margin:20px; */
+    
+
+    /* The following line is needed in order to reduce avoid having the table equip the full section size */
+    width: max-content;
+    margin : auto;
+    margin-top: 20px;
+}
+
+
+
+td{   
+    border: 1px solid black;
+    /* border: 1px dotted  black; */
+    /* border: 1px dashed  black; */
+    margin: 20px 20px;
+    width: 200px;    
+}
+
+tr:hover{
+    background-color: burlywood;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 70vh;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }

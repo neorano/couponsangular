@@ -1,0 +1,49 @@
+<p>Company creation</p>
+<div>
+    <label>Company:  </label>
+    <select [(ngModel)]="company" (ngModelChange)="setCurrentCompany($event)" name="companies">
+      <option *ngFor="let company of companies;let i=index" [ngValue]="company">
+        <ng-container *ngIf="i!=0; else elseTemplate">
+            {{company.name}}
+        </ng-container>
+        <ng-template #elseTemplate>
+            -=add new company=-
+        </ng-template>
+        
+        
+      </option>
+    </select>
+  </div>
+<form action="action_page.php" method="post">
+    <div class="imgcontainer">
+      <img src="assets/company.png" alt="Company" class="avatar">
+    </div>
+  
+    <div class="container">
+      <label for="name"><b>Compay name</b></label>
+      <input type="text" placeholder="Enter Company name" name="name" [(ngModel)]="company.name">
+  
+      <label for="address"><b>Address</b></label>
+      <input type="text" placeholder="Enter address" name="address" [(ngModel)]="company.address">
+
+      <label for="phone"><b>Phone</b></label>
+      <input type="text" placeholder="Enter phone" name="phone" [(ngModel)]="company.phone">
+      <button type="submit" (click)="createCompany()" value="Login">Create</button>
+    </div>
+  
+    <div class="container" >
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" (click)="getUser()" value="getAllusers">get User</button>
+      <button type="submit" (click)="getAllUsers()" value="getAllusers">get All users</button>
+    </div>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped mb-0" *ngIf=isShowAllUsers>
+        <tr *ngFor="let currentUser of users">
+            <td>{{ currentUser.id }}</td>
+            <td>{{ currentUser.username }}</td>
+            <td>{{ currentUser.userType }}</td>
+          
+        </tr>
+    </table>
+</div>
+

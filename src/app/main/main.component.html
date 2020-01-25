@@ -1,0 +1,48 @@
+
+  
+   <form action="action_page.php" method="post" class="was-validated">
+    <div class="imgcontainer">
+      <img src="assets/img_avatar.png" alt="Avatar" class="avatar">
+    </div>
+  
+    <div class="container">
+        <div class="col-md-3 mb-3">
+      <label for="username"><b>Username</b></label>
+      <input type="email" placeholder="Enter Username" 
+      class="form-control is-invalid"
+      [class.is-invalid]="name.invalid" required
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+         [(ngModel)]="userLoginDetails.username" 
+        name="name" #name="ngModel">
+        <div class="invalid-tooltip">
+            Valid email required
+          </div>
+    </div>
+        <div class="col-md-3 mb-3">
+      <label for="password"><b>Password</b></label>
+      <input type="password"
+      [class.is-invalid]="name.invalid"
+      pattern=".{3,}"
+      class="form-control is-invalid"
+       placeholder="Enter Password" required
+       
+       name="password" [(ngModel)]="userLoginDetails.password" 
+        name="password" #password="ngModel">
+        <div class="invalid-tooltip">
+            Password minimum length is 3
+          </div>
+       </div>
+         <!-- [disabled]="loading" class="btn btn-primary"  -->
+      <button 
+      type="submit" (click)="login()" value="Login" > 
+        Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+  
+    <div class="container" >
+      <button type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form> 

@@ -1,0 +1,67 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserLoginDetails } from '../models/UserLoginDetails';
+import { Observable } from 'rxjs';
+import { SuccessfulLoginServerResponse } from '../models/SuccessfulLoginServerResponse';
+import { User } from '../models/User';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+  private loginToken:string;
+
+    constructor(private http: HttpClient) {
+  }
+  public login(userLoginDetails: UserLoginDetails): Observable<SuccessfulLoginServerResponse> {
+    let url =  "http://localhost:8080/users/login";
+    return this.http.post<SuccessfulLoginServerResponse>(url, userLoginDetails);
+    }
+    public isLoggedIn():boolean{
+        if (this.loginToken){
+            return true;
+        }
+        return false;
+    }
+
+//   public createUser(userLoginDetails: UserLoginDetails): Observable<void> {        
+        
+//     return this.http.post<void>("http://localhost:8080/users", userLoginDetails);
+// }
+    public getUser(id:number):Observable<User>{
+        let url = `http://localhost:8080/users/${id}`;
+    
+        return this.http.get<User>(url);
+    }
+
+    public  createUser(user:User):Observable<void>{
+        let url = `http://localhost:8080/users`;
+        return this.http.post<void>(url,user);
+    }
+
+    public  updateUser(user:User):Observable<void>{
+        let url = `http://localhost:8080/users`;
+        return this.http.put<void>(url,user);
+    }
+
+    public deleteUser(id:number):Observable<void>{
+        let url = `http://localhost:8080/users/${id}`;
+        return this.http.delete<void>(url);
+    }
+
+    public getAllUsers():Observable<User[]>{
+        let url = `http://localhost:8080/users`;
+        return this.http.get<User[]>(url);
+    }
+
+public getLoginToken(): string{
+  return this.loginToken;
+}
+
+public setLoginToken(token:any): void{
+  this.loginToken = token;
+}
+
+}
+
+

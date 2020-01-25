@@ -1,0 +1,23 @@
+<div class="container" >
+
+  <div>
+    <label>Category: </label>
+    <select (change)="setCategory($event.target.value)">
+      <option *ngFor="let category of categories" value={{category}}>
+        {{category}}
+      </option>
+    </select>
+  </div>
+  <button type="submit" (click)="getCouponsByCategory()" value="getCoupons">get Coupons by category</button>
+</div>
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+<table class="table table-bordered table-striped mb-0" *ngIf=isShowCoupons>
+    <tr *ngFor="let currentCoupon of coupons" (click)=[(showCoupon(currentCoupon))]>
+      <td>{{ currentCoupon.title }}</td>
+            <td>{{ currentCoupon.price }}</td>
+            <td>{{ currentCoupon.amount }}</td>
+            <td>{{ currentCoupon.company.name }}</td>
+            <td>{{ currentCoupon.category }}</td>
+      
+    </tr>
+</table>

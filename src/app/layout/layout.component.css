@@ -1,0 +1,26 @@
+section {
+    height: 100%;
+    border: 2px solid black;
+    background-color: rgb(235, 247, 243);
+    text-align: center;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12 columns */
+    grid-template-rows: 15% 80% 5%; /* 3 rows */
+}
+
+section > * {
+    border: 1px solid black;
+}
+
+header, footer {
+    grid-column: span 12;
+}
+
+aside {
+    grid-column: span 2;
+}
+
+main {
+    grid-column: span 10;   
+}

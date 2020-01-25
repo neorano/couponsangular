@@ -1,0 +1,62 @@
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+<table class="table table-black">
+    
+   
+    
+    <thead>
+
+        <!-- A table row -->
+        <tr class="table-primary">
+            <!-- A table header -->
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Amount</th>
+            <th scope="col">company</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-success">
+        <tr *ngFor="let currentCoupon of coupons" (click)=[(showCoupon(currentCoupon))] data-toggle="modal" data-target="#myModal" >
+            <td>{{ currentCoupon.title }}</td>
+            <td>{{ currentCoupon.price }}</td>
+            <td>{{ currentCoupon.amount }}</td>
+            <td>{{ currentCoupon.company.name }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="container">             
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">{{ selectedCoupon.title }}</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)=[(showCoupons())]>&times;</button>
+            
+          </div>
+          <div class="modal-body">
+             
+             <p>{{ selectedCoupon.Company.name }}</p>            
+              <div>{{ selectedCoupon.description }}</div>
+          </div>
+          <div class="modal-footer">
+              <div style = "text-align: left;">                         
+              
+              <p>{{ selectedCoupon.price }}</p>
+              <div>{{ selectedCoupon.amount }} left</div>
+              <div>{{ selectedCoupon.endDate }} left</div>
+              </div>
+              <button type="button" (click)=[(purchaseCoupon())] class="btn btn-primary" data-dismiss="modal">Purchase</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)=[(showCoupons())]>Cancel</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+
+
