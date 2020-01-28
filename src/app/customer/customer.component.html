@@ -25,7 +25,7 @@
     </tbody>
 </table>
 </div>
-<div class="container">             
+<div class="container" *ngIf="selectedCoupon!=null">             
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
@@ -34,21 +34,25 @@
         <div class="modal-content">
           <div class="modal-header">
               <h4 class="modal-title">{{ selectedCoupon.title }}</h4>
-            <button type="button" class="close" data-dismiss="modal" (click)=[(showCoupons())]>&times;</button>
+             <br>
+        
+              <h6>  Company {{ selectedCoupon.company.name }}</h6> 
             
           </div>
           <div class="modal-body">
              
-             <p>{{ selectedCoupon.company.name }}</p>            
-              <div>{{ selectedCoupon.description }}</div>
+                        
+              <div>"{{ selectedCoupon.description }}"</div> 
+              
+              <div style = "text-align: left">                         
+              
+              <p>price {{ selectedCoupon.price }}$</p>
+              {{ selectedCoupon.amount }} left
+              Valid from {{ selectedCoupon.startDate }} to {{ selectedCoupon.endDate }}
+              </div>
           </div>
           <div class="modal-footer">
-              <div style = "text-align: left;">                         
-              
-              <p>{{ selectedCoupon.price }}</p>
-              <div>{{ selectedCoupon.amount }} left</div>
-              <div>{{ selectedCoupon.endDate }} left</div>
-              </div>
+             
               <button type="button" (click)=[(purchaseCoupon())] class="btn btn-primary" data-dismiss="modal">Purchase</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)=[(showCoupons())]>Cancel</button>
           </div>

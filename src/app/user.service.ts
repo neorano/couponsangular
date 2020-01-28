@@ -9,7 +9,6 @@ import { SuccessfulLoginServerResponse } from './models/SuccessfulLoginServerRes
 })
 export class UserService {
   // private http: HttpClient;
-  private loginToken:string;
 
     // HttpClient injection (a class variable will be automatically created)
     constructor(private http: HttpClient) {
@@ -33,13 +32,7 @@ export class UserService {
         
     return this.http.post<void>("http://localhost:8080/users", userLoginDetails);
 }
-public getLoginToken(): string{
-  return this.loginToken;
-}
 
-public setLoginToken(token:any): void{
-  this.loginToken = token;
-}
 
 }
 

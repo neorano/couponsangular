@@ -63,8 +63,8 @@ export class MainComponent implements OnInit {
       observable.subscribe(successfulServerRequestData => {
           console.log(successfulServerRequestData);                    
           
-          this.usersService.setLoginToken(successfulServerRequestData.token);
-
+          //this.usersService.setLoginToken(successfulServerRequestData.token);
+          sessionStorage.setItem("token",successfulServerRequestData.token);
           if(successfulServerRequestData.userType == "CUSTOMER"){
               this.header.setUserType("Hello, "+this.userLoginDetails.username);
               this.router.navigate(["/customer"]);

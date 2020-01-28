@@ -78,6 +78,30 @@ alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErr
 }
 });
 }
+public deleteCompany():void{
+    let observable = this.companyService.deleteCompany(this.company.id);
+    observable.subscribe(successfulServerRequestData => {
+        this.setAllCompanies();
+        alert("Company deleted succesfully!");
+    
+  }, serverErrorResponse => { 
+    console.log(serverErrorResponse);
+  if (serverErrorResponse.error.errorNumber==604){
+    //   //company already exist
+    // alert("Company name already exist!");
+    return;
+  }
+ 
+ 
+
+  else {
+alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErrorResponse.message + 
+"additional" + serverErrorResponse.errorNumber);
+}
+});
+}
+
+
   public createCompany(): void {
     
     const observable = this.companyService.createCompany(this.company);

@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
     // They will need to use their own userService for this (need save the token there after login)
-    constructor(private userService: UserService) { }
+    constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with our token if available
        
         let token:string;
-        token = this.userService.getLoginToken();
+        token = sessionStorage.getItem("token");
         if (token) {
             token = token +"";
             request = request.clone({

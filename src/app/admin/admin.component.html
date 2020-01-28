@@ -28,7 +28,8 @@
 
       <label for="phone"><b>Phone</b></label>
       <input type="text" placeholder="Enter phone" name="phone" [(ngModel)]="company.phone">
-      <button type="submit" (click)="createCompany()" value="Login">Create</button>
+      <button type="submit" class="btn btn-primary" (click)="createCompany()" value="Login">Create</button>
+      <button type="submit" class="btn btn-danger" (click)="deleteCompany()" value="Login">Delete</button>
     </div>
   
     <div class="container" >
