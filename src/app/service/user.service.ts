@@ -9,7 +9,6 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class UserService {
-  private loginToken:string;
 
     constructor(private http: HttpClient) {
   }
@@ -17,12 +16,7 @@ export class UserService {
     let url =  "http://localhost:8080/users/login";
     return this.http.post<SuccessfulLoginServerResponse>(url, userLoginDetails);
     }
-    public isLoggedIn():boolean{
-        if (this.loginToken){
-            return true;
-        }
-        return false;
-    }
+   
 
 //   public createUser(userLoginDetails: UserLoginDetails): Observable<void> {        
         
@@ -35,6 +29,7 @@ export class UserService {
     }
 
     public  createUser(user:User):Observable<void>{
+        
         let url = `http://localhost:8080/users`;
         return this.http.post<void>(url,user);
     }
@@ -54,13 +49,7 @@ export class UserService {
         return this.http.get<User[]>(url);
     }
 
-public getLoginToken(): string{
-  return this.loginToken;
-}
 
-public setLoginToken(token:any): void{
-  this.loginToken = token;
-}
 
 }
 

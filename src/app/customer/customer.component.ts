@@ -3,6 +3,7 @@ import { Coupon } from './../models/Coupon';
 import { Component, OnInit } from '@angular/core';
 import { Purchase } from '../models/Purchase';
 import { PurchasesService } from '../service/purchases.service';
+import { MinPricePipe } from '../pipes/min-price.pipe';
 
 @Component({
     selector: 'app-customer',
@@ -11,9 +12,10 @@ import { PurchasesService } from '../service/purchases.service';
 })
 export class CustomerComponent implements OnInit {
 
-    constructor(private couponsService: CouponsService, private purchasesService: PurchasesService) { }
+    constructor( private couponsService: CouponsService, private purchasesService: PurchasesService) { }
     public coupons: Coupon[];
     public selectedCoupon: Coupon;
+    public minPrice:number;
 
     public isShowAllCoupons: boolean;
 
@@ -21,7 +23,7 @@ export class CustomerComponent implements OnInit {
 
     ngOnInit() {
         this.showCoupons();
-
+        this.minPrice = 0;
     }
 
 

@@ -10,6 +10,7 @@ import { User } from '../models/User';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+    public data:string;
     public company:Company;
     public isShowAllUsers: boolean;
     public users:User[];
@@ -20,7 +21,10 @@ export class AdminComponent implements OnInit {
 
     this.company = new Company();
   }
+  public doCreate(data:string) {
+    this.data = data;
 
+  }
   ngOnInit() {
     this.isShowAllUsers=false;
     this.setAllCompanies();

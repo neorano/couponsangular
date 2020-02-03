@@ -1,3 +1,4 @@
+import { CustomerService } from './../service/customer.service';
 import { HeaderService } from './../header/header.service';
 import { UserLoginDetails } from './../models/UserLoginDetails';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,9 @@ import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
+import { LoginActivateGuard } from '../login-activate.guard';
+import { Customer } from '../models/Customer';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-main',
@@ -13,18 +17,26 @@ import { CustomValidators } from './custom-validators';
 })
 export class MainComponent implements OnInit {
 
+    public newCustomer:Customer;
+    public newPassword:string;
+
   public userLoginDetails: UserLoginDetails;
-    private usersService: UserService;
     private header : HeaderService;
     public frmSignup: FormGroup;
-    constructor(private fb: FormBuilder, usersService : UserService,private router: Router, header : HeaderService) {
+    public isUserLoggedIn:boolean;
+    constructor(private fb: FormBuilder, public usersService : UserService, public customerService: CustomerService,
+        private router: Router, header : HeaderService) {
+
+            
         this.userLoginDetails = new UserLoginDetails();
-        this.usersService = usersService;
         this.header = header;
+       
     }
 
     
     createSignupForm(): FormGroup {
+
+        
         return this.fb.group(
           {
             // email is required and must be a valid email email
@@ -54,12 +66,9 @@ export class MainComponent implements OnInit {
       }
 
     public login(): void{
-      // Creating an observable object
-      // It looks like an http request had been issued BUT IT DIDN'T
+  
       const observable = this.usersService.login(this.userLoginDetails);
 
-      // The method subscribe() ussues an http request to the server
-      // successfulServerRequestData
       observable.subscribe(successfulServerRequestData => {
           console.log(successfulServerRequestData);                    
           
@@ -105,8 +114,38 @@ export class MainComponent implements OnInit {
 
   }
 
+  public logOut ():void{
+    sessionStorage.removeItem("token");
+    this.isUserLoggedIn =  false;
+    this.header.logout();
+  }
+
+  public register() {
+    let observable = this.customerService.createCustomer(this.newCustomer,this.newPassword);
+   
+    observable.subscribe(successfulServerRequestData => {
+
+      alert("user "+this.newCustomer.user.username+" succesfully created!");
+
+    }, serverErrorResponse => { 
+      console.log(serverErrorResponse);
+      alert(serverErrorResponse.error.errorName);
+        }); 
+
+  }
+
 
   ngOnInit() {
+    this.newPassword="";
+      let user = new User("CUSTOMER");
+      this.newCustomer=new Customer(user,"","","",0);
+    if (sessionStorage.getItem("token")) {
+        this.isUserLoggedIn =  true;
+
+    }else {
+        this.isUserLoggedIn =  false;
+    }
+
   }
 
 }

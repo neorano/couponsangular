@@ -1,9 +1,9 @@
+
 import { RouterModule } from '@angular/router';
 import { UserService } from './service/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -19,6 +19,7 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
 import { CustomerComponent } from './customer/customer.component';
+import { MinPricePipe } from './pipes/min-price.pipe';
 
 @NgModule({
   declarations: [
@@ -31,15 +32,15 @@ import { CustomerComponent } from './customer/customer.component';
     MenuComponent,
     CustomerComponent,
     AdminComponent,
-    CompanyComponent
+    CompanyComponent,
+    MinPricePipe
   ],
   imports: [
-    
     NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule, AppRoutingModule,
+    RouterModule,
     HttpClientModule
   ],
   providers: [UserService,FormBuilder

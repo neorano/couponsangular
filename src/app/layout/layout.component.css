@@ -1,12 +1,13 @@
 section {
-    height: 100%;
+    
+    height:max-content;
     border: 2px solid black;
     background-color: rgb(235, 247, 243);
     text-align: center;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
-    grid-template-rows: 15% 80% 5%; /* 3 rows */
+    grid-template-rows: 40px auto 40px; /* 3 rows */
 }
 
 section > * {

@@ -1,48 +1,105 @@
-
-  
-   <form action="action_page.php" method="post" class="was-validated">
+<form action="action_page.php" method="post" class="was-validated">
     <div class="imgcontainer">
-      <img src="assets/img_avatar.png" alt="Avatar" class="avatar">
+        <img src="assets/img_avatar.png" alt="Avatar" class="avatar">
     </div>
-  
+
+    <div class="container" *ngIf="!isUserLoggedIn">
+        <div class="col-md-3 mb-3">
+            <label for="username"><b>Username</b></label>
+            <input type="email" placeholder="Enter Username" class="form-control is-invalid"
+                [class.is-invalid]="name.invalid" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                [(ngModel)]="userLoginDetails.username" name="name" #name="ngModel">
+            <div class="invalid-tooltip">
+                Valid email required
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="password"><b>Password</b></label>
+            <input type="password" [class.is-invalid]="name.invalid" pattern=".{3,}" class="form-control is-invalid"
+                placeholder="Enter Password" required name="password" [(ngModel)]="userLoginDetails.password"
+                name="password" #password="ngModel">
+            <div class="invalid-tooltip">
+                Password minimum length is 3
+            </div>
+        </div>
+        <!-- [disabled]="loading" class="btn btn-primary"  -->
+        <button type="submit" class="btn-success" (click)="login()" value="Login">
+            Login</button>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+
+    </div>
     <div class="container">
-        <div class="col-md-3 mb-3">
-      <label for="username"><b>Username</b></label>
-      <input type="email" placeholder="Enter Username" 
-      class="form-control is-invalid"
-      [class.is-invalid]="name.invalid" required
-      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-         [(ngModel)]="userLoginDetails.username" 
-        name="name" #name="ngModel">
-        <div class="invalid-tooltip">
-            Valid email required
-          </div>
+    <button type="button" class="btn-danger" (click)="logOut()">Log Out</button>
+</div>
+    <div class="container">
+
+        new to system?
+        <button type="button" class="btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
+
+        <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
-        <div class="col-md-3 mb-3">
-      <label for="password"><b>Password</b></label>
-      <input type="password"
-      [class.is-invalid]="name.invalid"
-      pattern=".{3,}"
-      class="form-control is-invalid"
-       placeholder="Enter Password" required
-       
-       name="password" [(ngModel)]="userLoginDetails.password" 
-        name="password" #password="ngModel">
-        <div class="invalid-tooltip">
-            Password minimum length is 3
-          </div>
-       </div>
-         <!-- [disabled]="loading" class="btn btn-primary"  -->
-      <button 
-      type="submit" (click)="login()" value="Login" > 
-        Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
+</form>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Register new User</h4>
+                    <br>
+
+
+                </div>
+                <div class="modal-body">
+
+                    <form>
+
+
+                        <div class="form-group row">
+                            <label for="usernameReg" class="col-sm-2 col-form-label">
+                                <b>Username </b></label>
+                                <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Enter Username" id="usernameReg"
+                             [(ngModel)]="newCustomer.user.username" name="newUsername"></div>
+                            </div>
+                            <div class="form-group row">
+                            <label for="passwordReg" class="col-sm-2 col-form-label"><b>Password</b></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="passwordReg" placeholder="Enter Password"
+                                [(ngModel)]="newPassword" name="newPassword">
+                            </div>
+
+                        </div>
+                        <br>
+                        <div><label for="text" class="col-sm-2 col-form-label"><b>Name </b></label>
+                            <input type="text" class="form-control" [(ngModel)]="newCustomer.name" name="newCustomerName"></div>
+                        <div><label for="text" class="col-sm-2 col-form-label"><b>phone </b></label>
+                            <input type="text" class="form-control" [(ngModel)]="newCustomer.phone" name="newCustomerPhone"></div>
+                        <div><label for="text" class="col-sm-2 col-form-label"><b>amountOfKids </b></label>
+                            <input type="text" class="form-control" [(ngModel)]="newCustomer.amountOfKids" name="newCustomerAmountOfKids"></div>
+
+
+                        <input type="checkbox" class="form-check-input" name="isMarried">
+                        <label for="checkbox" class="form-check-label" [(ngModel)]="newCustomer.isMarried" name="newCustomerIsMarried">is married
+                        </label>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" (click)=[(register())] class="btn btn-primary"
+                        data-dismiss="modal">Register</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-  
-    <div class="container" >
-      <button type="button" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form> 
+
+</div>

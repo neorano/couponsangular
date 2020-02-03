@@ -1,6 +1,6 @@
 import { Customer } from './../models/Customer';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -12,8 +12,14 @@ export class CustomerService {
 
 
 
-  public  createCustomer(customer:Customer):Observable<void>   {
-		return this.http.post<void>(this.url,customer);
+  public  createCustomer(customer:Customer, password:string):Observable<void>   {
+    const httpOptions = {
+      headers: new HttpHeaders({
+      })
+    };
+  httpOptions.headers =
+httpOptions.headers.set('password', password);
+		return this.http.post<void>(this.url,customer,httpOptions);
 
 	}
 

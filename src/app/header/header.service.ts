@@ -6,6 +6,9 @@ import { Injectable, OnInit } from '@angular/core';
 
 
 export class HeaderService implements OnInit {
+    logout() {
+        this.UserType = "No user logged in";
+    }
     public UserType: string;
   constructor() { 
     this.UserType = "No user logged in";

@@ -13,10 +13,17 @@
             <th scope="col">Amount</th>
             <th scope="col">company</th>
         </tr>
+        <tr class="table-primary" >
+            <!-- A table header -->
+            <th scope="col"></th>
+            <th scope="col"><input [(ngModel)]="minPrice"><input [(ngModel)]="minPrice"></th>
+            <th scope="col">Amount</th>
+            <th scope="col">company</th>
+        </tr>
     </thead>
 
     <tbody class="table-success">
-        <tr *ngFor="let currentCoupon of coupons" (click)=[(showCoupon(currentCoupon))] data-toggle="modal" data-target="#myModal" >
+        <tr *ngFor="let currentCoupon of coupons|minPricePipe:minPrice" (click)=[(showCoupon(currentCoupon))] data-toggle="modal" data-target="#myModal" >
             <td>{{ currentCoupon.title }}</td>
             <td>{{ currentCoupon.price }}</td>
             <td>{{ currentCoupon.amount }}</td>

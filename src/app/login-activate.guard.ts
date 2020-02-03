@@ -14,7 +14,6 @@ export class LoginActivateGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): 
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        console.log('AuthGuard#canActivate called');
         if (sessionStorage.getItem("token")) {
             return true;
         }
