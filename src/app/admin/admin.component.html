@@ -52,10 +52,10 @@
     <input type="text" name="name" [(ngModel)]="newUser.username">
 
     <label for="password"><b>Password</b></label>
-    <input type="text"  name="password" [(ngModel)]="newUser.password">
+    <input type="text"  name="password" [(ngModel)]="newUserpassword">
     <label for="usertypeSelect">Usertype</label>
-    <select class="form-control" id="usertypeSelect" [(ngModel)]="newUser.usertype"> 
-      <option selected >ADMIN</option>
+    <select class="form-control" id="usertypeSelect" [(ngModel)]="newUser.userType"> 
+      <option selected>ADMIN</option>
       <option>COMPANY</option>
     </select>
     <button type="submit" class="btn btn-primary" (click)="createUser()" value="Login">Create</button>

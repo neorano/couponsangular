@@ -10,6 +10,7 @@ import { User } from '../models/User';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  public newUserpassword:string;
   public newUser:User=new User("ADMIN");
     public data:string;
     public company:Company;
@@ -108,7 +109,7 @@ alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErr
 createUser() {
   
 
-  let observable = this.userService.createUser(this.newUser);
+  let observable = this.userService.createUser(this.newUser,this.newUserpassword);
    
   observable.subscribe(successfulServerRequestData => {
 
