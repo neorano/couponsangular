@@ -1,0 +1,25 @@
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-black">
+       
+        <thead>
+    
+            <!-- A table row -->
+            <tr class="table-primary">
+                <!-- A table header -->
+                <th scope="col">Coupon name</th>
+                <th scope="col">Coupon name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+            </tr>
+            
+        </thead>
+    
+        <tbody class="table-success">
+            <tr *ngFor="let currentPurchase of purchases" >
+                <td>{{ currentPurchase.coupon.title }}</td>
+                <td>{{ currentPurchase.amount }}</td>
+                <td>{{ currentPurchase.timestamp | date:'MMM d, y, H:mm:ss' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>

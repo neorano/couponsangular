@@ -3,7 +3,7 @@ import { Coupon } from './../models/Coupon';
 import { Component, OnInit } from '@angular/core';
 import { Purchase } from '../models/Purchase';
 import { PurchasesService } from '../service/purchases.service';
-import { MinPricePipe } from '../pipes/min-price.pipe';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-customer',
@@ -12,7 +12,8 @@ import { MinPricePipe } from '../pipes/min-price.pipe';
 })
 export class CustomerComponent implements OnInit {
 
-    constructor( private couponsService: CouponsService, private purchasesService: PurchasesService) { }
+    constructor( private couponsService: CouponsService,
+         private purchasesService: PurchasesService, private router: Router) { }
     public coupons: Coupon[];
     public selectedCoupon: Coupon;
     public minPrice:number;
@@ -48,6 +49,10 @@ export class CustomerComponent implements OnInit {
             alert('Failed to get coupons ' + JSON.stringify(error));
         });
     }
+    showPurchases(){
+        this.router.navigate(["/purchases"]);
+    }
+    
 
     public purchaseCoupon() {
         let purchase = new Purchase(this.selectedCoupon, 1);

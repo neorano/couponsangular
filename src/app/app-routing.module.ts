@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
 import { LoginActivateGuard } from './login-activate.guard';
+import { CustomerPurchasesComponent } from './customer/customer-purchases/customer-purchases.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     // { path: "add-user", canActivate: [LoginGuardService], component: AddUserComponent },
     // { path: "about", component: AboutComponent },
     // { path: "contact-us", component: ContactUsComponent },
+    { path: "purchases", component: CustomerPurchasesComponent , canActivate:[LoginActivateGuard] },
     { path: "customer", component: CustomerComponent , canActivate:[LoginActivateGuard] },
     { path: "admin", component: AdminComponent , canActivate:[LoginActivateGuard] },
     { path: "company", component: CompanyComponent , canActivate:[LoginActivateGuard] },

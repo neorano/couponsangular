@@ -24,7 +24,8 @@ export class MainComponent implements OnInit {
     private header : HeaderService;
     public frmSignup: FormGroup;
     public isUserLoggedIn:boolean;
-    constructor(private fb: FormBuilder, public usersService : UserService, public customerService: CustomerService,
+    constructor(private fb: FormBuilder, public usersService : UserService, 
+        public customerService: CustomerService,
         private router: Router, header : HeaderService) {
 
             
@@ -107,8 +108,7 @@ export class MainComponent implements OnInit {
                 }
 
                 else {
-          alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErrorResponse.message + 
-          " additional " + serverErrorResponse.errorNumber);
+                    alert(serverErrorResponse.error.errorName);
               }
       }); 
 

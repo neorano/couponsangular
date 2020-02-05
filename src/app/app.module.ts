@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
 import { CustomerComponent } from './customer/customer.component';
 import { MinPricePipe } from './pipes/min-price.pipe';
+import { CustomerPurchasesComponent } from './customer/customer-purchases/customer-purchases.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MinPricePipe } from './pipes/min-price.pipe';
     CustomerComponent,
     AdminComponent,
     CompanyComponent,
-    MinPricePipe
+    MinPricePipe,
+    CustomerPurchasesComponent
   ],
   imports: [
     NgbModule,
