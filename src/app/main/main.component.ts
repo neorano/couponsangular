@@ -127,11 +127,11 @@ export class MainComponent implements OnInit {
     let observable = this.customerService.createCustomer(this.newCustomer,this.newPassword);
    
     observable.subscribe(successfulServerRequestData => {
+      console.log(this.newCustomer);
 
       alert("user "+this.newCustomer.user.username+" succesfully created!");
 
     }, serverErrorResponse => { 
-      console.log(serverErrorResponse);
       alert(serverErrorResponse.error.errorName);
         }); 
 
