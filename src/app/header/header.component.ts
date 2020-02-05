@@ -1,4 +1,4 @@
-import { HeaderService } from './header.service';
+
 import { Component, OnInit, Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
@@ -9,12 +9,22 @@ import { Component, OnInit, Injectable } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  refresh() {
+    if (sessionStorage.getItem("greeting")){
+      this.greeting =sessionStorage.getItem("greeting");
+    }
+    else{
+      this.greeting = "No user logged in";
+    }
+    console.log(this.greeting);
+  }
    
-  constructor(public HeaderService: HeaderService) { 
-
+  public greeting: string;
+  constructor() { 
   }
 
   ngOnInit() {
+    this.refresh();
   }
 
   

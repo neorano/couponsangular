@@ -1,14 +1,15 @@
 <div class="container" >
 
   <div>
-    <label>Category: </label>
+    <label>Category:  </label>
     <select (change)="setCategory($event.target.value)">
       <option *ngFor="let category of categories" value={{category}}>
         {{category}}
       </option>
     </select>
   </div>
-  <button type="submit" (click)="getCouponsByCategory()" value="getCoupons">get Coupons by category</button>
+  <button class = "btn btn-primary"  data-toggle="modal" data-target="#myModalCouponCreation">Create new coupon</button>
+  
 </div>
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
 <table class="table table-bordered table-striped mb-0" *ngIf=isShowCoupons>
@@ -16,8 +17,102 @@
       <td>{{ currentCoupon.title }}</td>
             <td>{{ currentCoupon.price }}</td>
             <td>{{ currentCoupon.amount }}</td>
+            <!-- only to check if really i get ONLY coupons of my company -->
             <td>{{ currentCoupon.company.name }}</td>
             <td>{{ currentCoupon.category }}</td>
       
     </tr>
 </table>
+
+
+<div class="container">             
+  <!-- Modal -->
+  <div class="modal fade" id="myModalCouponCreation" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Create new coupon</h4>
+           <br>          
+        </div>
+        <div class="modal-body">
+          <div><label for="text" class="col-sm-2 col-form-label"><b>title </b></label>
+            <input type="text" class="form-control" [(ngModel)]="newCoupon.title" name="newCoupon"></div>
+         <div><label for="text" class="col-sm-2 col-form-label"><b>description </b></label>
+            <input type="text" class="form-control" [(ngModel)]="newCoupon.description" name="newCoupon"></div>
+            <div><label for="number" class="col-sm-2 col-form-label"><b>amount </b></label>
+            <input type="number" min=0 class="form-control" [(ngModel)]="newCoupon.amount" name="newCoupon"></div>
+            
+            <div><label for="number"  class="col-sm-2 col-form-label"><b>price </b></label>
+              <input type="number" step=0.001 min=0 class="form-control" [(ngModel)]="newCoupon.price" name="newCoupon"></div>
+            <label>Category:  </label>
+            <select (change)="setNewCouponCategory($event.target.value)">
+              <option *ngFor="let category of categoriesForCreation" value={{category}}>
+                {{category}}
+              </option>
+            </select>
+            <!-- datepicker -->
+            <form class="form-inline">
+              <div class="form-group hidden">
+                <div class="input-group">
+                  <input name="datepicker"
+                         class="form-control"
+                         ngbDatepicker
+                         #datepicker="ngbDatepicker"
+                         [autoClose]="'outside'"
+                         (dateSelect)="onDateSelection($event)"
+                         [displayMonths]="2"
+                         [dayTemplate]="t"
+                         outsideDays="hidden"
+                         [startDate]="fromDate">
+                  <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                          [class.focused]="focused"
+                          [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)"
+                          (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input #dpstartDate
+                         class="form-control" placeholder="yyyy-mm-dd"
+                         name="dpstartDate"
+                         [value]="formatter.format(startDate)"
+                         (input)="startDate = validateInput(startDate, dpstartDate.value)">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group ml-2">
+                <div class="input-group">
+                  <input #dpendDate
+                         class="form-control" placeholder="yyyy-mm-dd"
+                         name="dpendDate"
+                         [value]="formatter.format(endDate)"
+                         (input)="endDate = validateInput(endDate, dpendDate.value)">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+           
+            <button type="button" (click)=[(createCoupon())] class="btn btn-primary" data-dismiss="modal">Create</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

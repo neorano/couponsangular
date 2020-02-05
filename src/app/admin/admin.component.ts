@@ -10,6 +10,7 @@ import { User } from '../models/User';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  public newUser:User=new User("ADMIN");
     public data:string;
     public company:Company;
     public isShowAllUsers: boolean;
@@ -104,7 +105,20 @@ alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErr
 }
 });
 }
+createUser() {
+  
 
+  let observable = this.userService.createUser(this.newUser);
+   
+  observable.subscribe(successfulServerRequestData => {
+
+    alert("user "+this.newUser.username+" succesfully created!");
+
+  }, serverErrorResponse => { 
+    console.log(serverErrorResponse);
+    alert(serverErrorResponse.error.errorName);
+      }); 
+}
 
   public createCompany(): void {
     
@@ -115,7 +129,6 @@ alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErr
 
     
   }, serverErrorResponse => { 
-    console.log(serverErrorResponse);
   if (serverErrorResponse.error.errorNumber==604){
       //company already exist
     alert("Company name already exist!");

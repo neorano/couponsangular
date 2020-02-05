@@ -13,7 +13,6 @@ import { MainComponent } from './main/main.component';
 import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, FormBuilder } from '@angular/forms';
-//import { CustomerComponent } from './customer/customer.component';
 import { CouponsService } from './service/coupons.service';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { AdminComponent } from './admin/admin.component';

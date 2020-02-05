@@ -1,12 +1,11 @@
+import { HeaderComponent } from './../header/header.component';
 import { CustomerService } from './../service/customer.service';
-import { HeaderService } from './../header/header.service';
 import { UserLoginDetails } from './../models/UserLoginDetails';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
-import { LoginActivateGuard } from '../login-activate.guard';
 import { Customer } from '../models/Customer';
 import { User } from '../models/User';
 
@@ -21,16 +20,14 @@ export class MainComponent implements OnInit {
     public newPassword:string;
 
   public userLoginDetails: UserLoginDetails;
-    private header : HeaderService;
     public frmSignup: FormGroup;
     public isUserLoggedIn:boolean;
     constructor(private fb: FormBuilder, public usersService : UserService, 
-        public customerService: CustomerService,
-        private router: Router, header : HeaderService) {
+        public customerService: CustomerService, private headerComponent :HeaderComponent,
+        private router: Router) {
 
             
         this.userLoginDetails = new UserLoginDetails();
-        this.header = header;
        
     }
 
@@ -73,22 +70,26 @@ export class MainComponent implements OnInit {
       observable.subscribe(successfulServerRequestData => {
           console.log(successfulServerRequestData);                    
           
-          //this.usersService.setLoginToken(successfulServerRequestData.token);
           sessionStorage.setItem("token",successfulServerRequestData.token);
+          sessionStorage.setItem("usertype",successfulServerRequestData.userType);
           if(successfulServerRequestData.userType == "CUSTOMER"){
-              this.header.setUserType("Hello, "+this.userLoginDetails.username);
+              sessionStorage.setItem("greeting","Hello, "+this.userLoginDetails.username);
+              this.headerComponent.refresh();
               this.router.navigate(["/customer"]);
           }
 
           if(successfulServerRequestData.userType == "ADMIN"){
-            this.header.setUserType("Admin "+this.userLoginDetails.username);
+            sessionStorage.setItem("greeting","Admin "+this.userLoginDetails.username);
+            this.headerComponent.refresh();
               this.router.navigate(["/admin"]);
           }
 
           if(successfulServerRequestData.userType == "COMPANY"){
-            this.header.setUserType("Company "+successfulServerRequestData.companyName);
+            sessionStorage.setItem("greeting","Company "+successfulServerRequestData.companyName);
+            this.headerComponent.refresh();
               this.router.navigate(["/company"]);
           }
+          
       }, serverErrorResponse => { // Reaching here means that the server had failed
                   // serverErrorResponse is the object returned from the ExceptionsHandler
                   console.log(serverErrorResponse);
@@ -116,8 +117,10 @@ export class MainComponent implements OnInit {
 
   public logOut ():void{
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("usertype");
+    sessionStorage.removeItem("greeting");
+    this.headerComponent.refresh();
     this.isUserLoggedIn =  false;
-    this.header.logout();
   }
 
   public register() {
@@ -138,7 +141,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.newPassword="";
       let user = new User("CUSTOMER");
-      this.newCustomer=new Customer(user,"","","",0);
+      this.newCustomer=new Customer(user,"","","",0,false);
     if (sessionStorage.getItem("token")) {
         this.isUserLoggedIn =  true;
 

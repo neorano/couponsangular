@@ -1,3 +1,4 @@
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Company } from './Company';
 
 export class Coupon{
