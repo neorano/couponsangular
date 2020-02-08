@@ -5,35 +5,24 @@
 
     <div class="container" *ngIf="!isUserLoggedIn">
         <div class="col-md-3 mb-3">
-
-
-
-            
                 <mat-form-field appearance="outline">
-
-                    <mat-label for="username">UserName</mat-label>
-                    
-
-                  
-             
-
-
-
-            
-            <input type="email" placeholder="Enter Username" class="form-control is-invalid"
+                    <mat-label>Username</mat-label>
+            <input matInput type="email" placeholder="Enter Username" class="form-control is-invalid"
                 [class.is-invalid]="name.invalid" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 [(ngModel)]="userLoginDetails.username" name="name" #name="ngModel">
 
-             </mat-form-field>   
+             </mat-form-field>    
             <div class="invalid-tooltip">
                 Valid email required
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <label for="password"><b>Password</b></label>
-            <input type="password" [class.is-invalid]="name.invalid" pattern=".{3,}" class="form-control is-invalid"
+            <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [class.is-invalid]="name.invalid" pattern=".{3,}" class="form-control is-invalid"
                 placeholder="Enter Password" required name="password" [(ngModel)]="userLoginDetails.password"
                 name="password" #password="ngModel">
+            </mat-form-field>  
             <div class="invalid-tooltip">
                 Password minimum length is 3
             </div>
@@ -148,3 +137,10 @@
 
 </div>
 
+<div class="example-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Placeholder">
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+  </div>
