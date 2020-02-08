@@ -17,7 +17,7 @@ export class CustomerComponent implements OnInit {
     public coupons: Coupon[];
     public selectedCoupon: Coupon;
     public minPrice:number;
-
+        public amount:number=1;
     public isShowAllCoupons: boolean;
 
 
@@ -55,12 +55,15 @@ export class CustomerComponent implements OnInit {
     
 
     public purchaseCoupon() {
-        let purchase = new Purchase(this.selectedCoupon, 1);
+        if (this.amount<1){
+            this.amount=1;
+        }
+        let purchase = new Purchase(this.selectedCoupon, this.amount);
         let observable = this.purchasesService.createPurchase(purchase);
         observable.subscribe(response => {
             this.showCoupons();
             alert("success");
-
+            this.amount=1;
 
         }, error => {
             if (error.error.errorNumber == 607) {

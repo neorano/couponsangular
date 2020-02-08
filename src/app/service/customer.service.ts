@@ -2,12 +2,13 @@ import { Customer } from './../models/Customer';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private url = `http://localhost:8080/customers`;
+  private url =environment.rootUrl+ `/customers`;
   constructor(private http: HttpClient) { }
 
 

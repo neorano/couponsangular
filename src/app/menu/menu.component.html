@@ -2,8 +2,11 @@
 <div class="container">
     <!-- Content here -->
 <a routerLink="/home" routerLinkActive="the-chosen-one">Home</a>
+<div *ngIf="headerService.usertype=='CUSTOMER'">
 <a routerLink="/customer" routerLinkActive="the-chosen-one">Buy coupons</a>
 <a routerLink="/purchases" routerLinkActive="the-chosen-one">My purchases</a>
+</div>
 
-    
+
+
   </div>

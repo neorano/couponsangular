@@ -4,16 +4,17 @@ import { UserLoginDetails } from '../models/UserLoginDetails';
 import { Observable } from 'rxjs';
 import { SuccessfulLoginServerResponse } from '../models/SuccessfulLoginServerResponse';
 import { User } from '../models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+private url=environment.rootUrl+`/users`;
     constructor(private http: HttpClient) {
   }
   public login(userLoginDetails: UserLoginDetails): Observable<SuccessfulLoginServerResponse> {
-    let url =  "http://localhost:8080/users/login";
+    let url =  this.url+"/login";
     return this.http.post<SuccessfulLoginServerResponse>(url, userLoginDetails);
     }
    
@@ -23,7 +24,7 @@ export class UserService {
 //     return this.http.post<void>("http://localhost:8080/users", userLoginDetails);
 // }
     public getUser(id:number):Observable<User>{
-        let url = `http://localhost:8080/users/${id}`;
+        let url = this.url+`/${id}`;
     
         return this.http.get<User>(url);
     }
@@ -35,23 +36,23 @@ export class UserService {
           };
         httpOptions.headers =
       httpOptions.headers.set('password', password);
-        let url = `http://localhost:8080/users`;
-        return this.http.post<void>(url,user,httpOptions);
+        
+        return this.http.post<void>(this.url,user,httpOptions);
     }
 
     public  updateUser(user:User):Observable<void>{
-        let url = `http://localhost:8080/users`;
-        return this.http.put<void>(url,user);
+        
+        return this.http.put<void>(this.url,user);
     }
 
     public deleteUser(id:number):Observable<void>{
-        let url = `http://localhost:8080/users/${id}`;
+        let url = this.url+`/${id}`;
         return this.http.delete<void>(url);
     }
 
     public getAllUsers():Observable<User[]>{
-        let url = `http://localhost:8080/users`;
-        return this.http.get<User[]>(url);
+        
+        return this.http.get<User[]>(this.url);
     }
 
 

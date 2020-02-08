@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PurchasesService } from 'src/app/service/purchases.service';
 import { Purchase } from 'src/app/models/Purchase';
@@ -9,11 +10,17 @@ import { Purchase } from 'src/app/models/Purchase';
 })
 export class CustomerPurchasesComponent implements OnInit {
     public purchases:Purchase[];
-  constructor(public purchasesService: PurchasesService) { }
+  constructor(public purchasesService: PurchasesService,private router: Router) { }
 
   ngOnInit() {
     this.showPurchases();
   }
+
+  showCoupons(){
+
+    this.router.navigate(["/customer"]);
+  }
+
     showPurchases() {
         let observable = this.purchasesService.getAllPurchases();
         observable.subscribe(purchasesList => {

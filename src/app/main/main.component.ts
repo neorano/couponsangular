@@ -1,3 +1,4 @@
+import { HeaderService } from './../service/header.service';
 import { HeaderComponent } from './../header/header.component';
 import { CustomerService } from './../service/customer.service';
 import { UserLoginDetails } from './../models/UserLoginDetails';
@@ -13,6 +14,7 @@ import { User } from '../models/User';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
+  
 })
 export class MainComponent implements OnInit {
 
@@ -23,7 +25,7 @@ export class MainComponent implements OnInit {
     public frmSignup: FormGroup;
     public isUserLoggedIn:boolean;
     constructor(private fb: FormBuilder, public usersService : UserService, 
-        public customerService: CustomerService, private headerComponent :HeaderComponent,
+        public customerService: CustomerService, private headerService :HeaderService,
         private router: Router) {
 
             
@@ -74,19 +76,19 @@ export class MainComponent implements OnInit {
           sessionStorage.setItem("usertype",successfulServerRequestData.userType);
           if(successfulServerRequestData.userType == "CUSTOMER"){
               sessionStorage.setItem("greeting","Hello, "+this.userLoginDetails.username);
-              this.headerComponent.refresh();
+              this.headerService.refresh();
               this.router.navigate(["/customer"]);
           }
 
           if(successfulServerRequestData.userType == "ADMIN"){
             sessionStorage.setItem("greeting","Admin "+this.userLoginDetails.username);
-            this.headerComponent.refresh();
+            this.headerService.refresh();
               this.router.navigate(["/admin"]);
           }
 
           if(successfulServerRequestData.userType == "COMPANY"){
-            sessionStorage.setItem("greeting","Company "+successfulServerRequestData.companyName);
-            this.headerComponent.refresh();
+            sessionStorage.setItem("greeting","Company "+successfulServerRequestData.company.name);
+            this.headerService.refresh();
               this.router.navigate(["/company"]);
           }
           
@@ -119,7 +121,7 @@ export class MainComponent implements OnInit {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("usertype");
     sessionStorage.removeItem("greeting");
-    this.headerComponent.refresh();
+    this.headerService.refresh();
     this.isUserLoggedIn =  false;
   }
 

@@ -20,6 +20,10 @@ import { CompanyComponent } from './company/company.component';
 import { CustomerComponent } from './customer/customer.component';
 import { MinPricePipe } from './pipes/min-price.pipe';
 import { CustomerPurchasesComponent } from './customer/customer-purchases/customer-purchases.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule,MatInputModule, MatIconModule, MatSlideToggleModule,
+   MatSliderModule, MatRadioModule, MatCheckboxModule, MatButtonModule, MatAutocompleteModule, MatDatepickerModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -37,12 +41,24 @@ import { CustomerPurchasesComponent } from './customer/customer-purchases/custom
     CustomerPurchasesComponent
   ],
   imports: [
+    MatIconModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService,FormBuilder
   , CouponsService , HeaderComponent

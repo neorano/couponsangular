@@ -7,8 +7,8 @@
   <p>Company creation</p>
   <div>
     <label>Company: </label>
-    <select [(ngModel)]="company" (ngModelChange)="setCurrentCompany($event)" name="companies">
-      <option *ngFor="let company of companies;let i=index" [ngValue]="company">
+    <select [(ngModel)]="company" (ngModelChange)="setCurrentCompany($event)" name="companies" >
+      <option *ngFor="let company of companies;let i=index" [ngValue]="company" >
         <ng-container *ngIf="i!=0; else elseTemplate">
           {{company.name}}
         </ng-container>
@@ -58,8 +58,19 @@
       <option selected>ADMIN</option>
       <option>COMPANY</option>
     </select>
+    <div *ngIf="newUser.userType=='COMPANY'">
+    <select class="form-control" id="CompanySelect" [(ngModel)]="newUser.company" > 
+        <ng-container *ngFor="let company of companies;let i=index">
+        
+            <ng-container *ngIf="i!=0">
+                <option [ngValue]="company">{{company.name}}</option>
+              </ng-container>
+            
+        </ng-container>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary" (click)="createUser()" value="Login">Create</button>
-   
+
   </div>
 
 

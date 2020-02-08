@@ -48,7 +48,7 @@
           <div class="modal-body">
              
                         
-              <div>"{{ selectedCoupon.description }}"</div> 
+              <div>{{ selectedCoupon.description }}</div> 
               
               <div style = "text-align: left">                         
               
@@ -57,8 +57,17 @@
               Valid from {{ selectedCoupon.startDate }} to {{ selectedCoupon.endDate }}
               </div>
           </div>
+         
           <div class="modal-footer">
-             
+            <div class="form-group row">
+                <label for="text" class="col-sm-3 col-form-label"><b>Amount</b></label>
+                    <div class="col-sm-6">
+                        <input type="number" min=1 class="form-control"
+                            [(ngModel)]="amount" name="coupons amount">
+                    </div>
+    
+                
+            </div>
               <button type="button" (click)=[(purchaseCoupon())] class="btn btn-primary" data-dismiss="modal">Purchase</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)=[(showCoupons())]>Cancel</button>
           </div>

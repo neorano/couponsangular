@@ -1,3 +1,4 @@
+import { HeaderService } from './../service/header.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public headerService:HeaderService) { }
 
   ngOnInit() {
+    this.headerService.refresh();
   }
 
 }

@@ -2,12 +2,13 @@ import { Observable } from 'rxjs';
 import { Purchase } from './../models/Purchase';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchasesService {
-  private url = `http://localhost:8080/purchases`;
+  private url = environment.rootUrl+`/purchases`;
   constructor(private http: HttpClient) { }
 
   public  createPurchase(purchase:Purchase):Observable<void>   {
@@ -18,7 +19,7 @@ export class PurchasesService {
 
     public  updatePurchase(purchase:Purchase):Observable<void>{
       
-      // should not be accessible, can crate problems
+      // should not be accessible, can create problems
       // return this.http.put<void>(this.url,purchase);
       return
   

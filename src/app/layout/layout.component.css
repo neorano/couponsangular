@@ -1,5 +1,5 @@
 section {
-    
+    min-height: 100vh;
     height:max-content;
     border: 2px solid black;
     background-color: rgb(235, 247, 243);
